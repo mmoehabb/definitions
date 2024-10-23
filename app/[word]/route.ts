@@ -6,7 +6,7 @@ import { auth } from '@/auth';
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
-    const word_text = url.pathname.slice(1).toLowerCase().replaceAll("%20", " ");
+    const word_text = url.pathname.slice(1).toLowerCase().replaceAll('%20', ' ');
 
     const db = await getDB();
     const word_sf = db.get(word_text.slice(0, 2));
