@@ -6,7 +6,7 @@ import { auth } from '@/auth';
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
-    const word_text = url.pathname.slice(1).toLowerCase();
+    const word_text = url.pathname.slice(1).toLowerCase().replaceAll("%20", " ");
 
     const db = await getDB();
     const word_sf = db.get(word_text.slice(0, 2));
@@ -46,7 +46,8 @@ export async function GET(req: Request) {
       users_sf.update(user_index, (prev) => ({ views: [...prev.views, { word: word.text }] }));
     })();
 
-    return NextResponse.json({ word: { ...word, reports: undefined } }); // reports attribute is removed for user privacy
+    // reports attribute is removed for user privacy
+    return NextResponse.json({ word: { ...word, reports: undefined } });
   } catch (e) {
     console.error(e);
     return NextResponse.json({ error: e.message }, { status: e.cause });
