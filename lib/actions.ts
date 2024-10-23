@@ -18,11 +18,11 @@ export type State = {
 
 const formSchema = z.object({
   word_text: z.string().min(2).max(50),
-  def_content: z.string().min(10).max(255),
-  def_reference: z.string().min(10).max(45),
-  example_text: z.string().min(10).max(145),
-  example_reference: z.string().max(45),
-  mention_title: z.string().min(10).max(45),
+  def_content: z.string().min(8).max(512),
+  def_reference: z.string().min(8).max(128),
+  example_text: z.string().min(8).max(255),
+  example_reference: z.string().max(128),
+  mention_title: z.string().min(10).max(128),
   mention_hyperlink: z.string().startsWith('https://', { message: 'Must provide secure URL' }),
 });
 
