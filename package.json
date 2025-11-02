@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "RAILWAY_VOLUME_MOUNT_PATH=/app next start",
+    "start": "DB_PATH=./ next start",
     "lint": "next lint"
   },
   "dependencies": {

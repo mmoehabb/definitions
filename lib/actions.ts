@@ -77,7 +77,7 @@ export async function addWord(_: State, formData: FormData): Promise<State> {
 
   try {
     const sf = (await getDB()).get(newWord.text.slice(0, 2));
-    const exists = sf.getWhere((word) => (word as Word).text == newWord.text);
+    const exists = sf.getWhere((word: Word) => word.text == newWord.text);
     if ((exists as Word).text) {
       return {
         message: { text: newWord.text + ' already exists.', type: 'warning' },
@@ -122,7 +122,7 @@ export async function addDefinition(_: State, formData: FormData) {
   try {
     const sf = (await getDB()).get(valFields.data.word_text.slice(0, 2));
     // check if a def from the same ref exists
-    const exists = sf.getWhere((word) =>
+    const exists = sf.getWhere((word: Word) =>
       word.definitions.find((def) => def.reference == newDefinition.reference),
     );
     if (exists.text) {
@@ -134,8 +134,8 @@ export async function addDefinition(_: State, formData: FormData) {
       };
     }
     sf.updateWhere(
-      (word) => (word as Word).text == valFields.data.word_text,
-      (prev) => ({
+      (word: Word) => word.text == valFields.data.word_text,
+      (prev: Word) => ({
         definitions: [...prev.definitions, newDefinition],
       }),
     );
@@ -178,8 +178,8 @@ export async function addExample(_: State, formData: FormData) {
     const sf = (await getDB()).get(valFields.data.word_text.slice(0, 2));
     // check if a def from the same ref exists
     sf.updateWhere(
-      (word) => (word as Word).text == valFields.data.word_text,
-      (prev) => ({
+      (word: Word) => word.text == valFields.data.word_text,
+      (prev: Word) => ({
         examples: [...prev.examples, newExample],
       }),
     );
@@ -222,8 +222,8 @@ export async function addMention(_: State, formData: FormData) {
     const sf = (await getDB()).get(valFields.data.word_text.slice(0, 2));
     // check if a def from the same ref exists
     sf.updateWhere(
-      (word) => (word as Word).text == valFields.data.word_text,
-      (prev) => ({
+      (word: Word) => word.text == valFields.data.word_text,
+      (prev: Word) => ({
         mentions: [...prev.mentions, newMention],
       }),
     );

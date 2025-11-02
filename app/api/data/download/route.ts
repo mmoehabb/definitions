@@ -8,11 +8,11 @@ export async function GET() {
     headers.append('Content-Disposition', 'attachment; filename=archive.zip');
     headers.append('Content-Type', 'application/zip');
 
-    const RAILWAY_PATH = process.env.RAILWAY_VOLUME_MOUNT_PATH;
-    if (!RAILWAY_PATH || RAILWAY_PATH === '') {
-      console.warn('RAILWAY_VOLUME_MOUNT_PATH undefined.');
+    const DB_PATH = process.env.DB_PATH;
+    if (!DB_PATH || DB_PATH === '') {
+      console.warn('DB_PATH undefined.');
     }
-    const dbpath = path.join(RAILWAY_PATH || './', 'db');
+    const dbpath = path.join(DB_PATH || './', 'db');
 
     const zip = new AdmZip();
     zip.addLocalFolder(dbpath);
