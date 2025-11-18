@@ -40,9 +40,7 @@ function createDB() {
   return db;
 }
 
-export async function getDB() {
-  if (!global.db) {
-    global.db = createDB();
-  }
-  return global.db;
+export async function getDB(): Promise<StateManager> {
+  if (!global.db) global.db = createDB();
+  return global.db as StateManager;
 }
